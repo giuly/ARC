@@ -38,10 +38,17 @@ h1, h3, h4 {
 
 }
 
-.help-block {
+.help-block, .generalError {
   color: red;
   margin-bottom: 0px;
   margin-top:2px;
+}
+
+.successSubmit {
+  color: green;
+  margin-bottom: 0px;
+  margin-top:2px;
+  display: none;
 }
 
 button.disabled, button[disabled], .button.disabled, .button[disabled], a.button.disabled, a.button[disabled], button:focus:not(.disabled), .button:focus:not(.disabled), a.button:focus:not(.disabled) {

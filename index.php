@@ -1,3 +1,15 @@
+<?php
+define('in_access', 1);
+// LOAD THE MODEL
+require('./model/model.php');
+// Load posts
+$json_posts = new Model('model/posts.json');
+$posts = array_reverse($json_posts->read());
+
+$json_words = new Model('model/word_occurance.json');
+$words = array_slice(array_reverse($json_words->read()), 0, 5);
+
+?>
 <!doctype html>
 
 <html lang="en">
@@ -55,9 +67,11 @@
           </div>
           <div class="large-4 columns">
             <button type="submit" class="customButton" ng-disabled="postForm.$invalid">Submit</button>
-            <p ng-show="postForm.name.$invalid && !postForm.name.$pristine" class="help-block error">You name is required.</p>
+            <p ng-show="postForm.name.$invalid && !postForm.name.$pristine" class="help-block error">Post Title is required.</p>
             <p ng-show="postForm.email.$invalid && !postForm.email.$pristine" class="help-block error">Please, enter a valid email.</p>
             <p class="help-block error hidden imageOrText">You need to enter a description or an image.</p>
+            <p class="generalError"></p>
+            <p class="successSubmit">Post submited successfully.</p>
           </div>
         </div> 
         <!-- File upload Section/Row -->
@@ -89,50 +103,32 @@
           </div>  
           <div class="large-12 medium-8 columns">
             <dl class="tags">
-              <li>Awesome<span class="hiddenComma">, </span></li>
-              <li>Spectacular<span class="hiddenComma">, </span></li>
-              <li>Totally<span class="hiddenComma">, </span></li>
+              <?php foreach ($words as $key=>$word) {
+               echo '<li>'.ucfirst($key).'<span class="hiddenComma">, </span></li>';
+              } ?>
             </dl>
           </div> 
         </div>
       </div>
-      <div class="large-8 small-12 large-pull-4 columns">
-        <div class="row box postBox marginBottom20">
-          <span class="postDate">11/11/2014</span>
-          <div class="row">
-            <div class="large-12 small-9 columns postTitle"><h4>My latest blog post! Sorry, no picture this time!</h4></div>
-          </div>
-          <div class="row marginTop5">
-            <div class="large-12 columns">
-              <p>Today awesome stuff happened tome, I'll tell you guys all about it! It's going to be an amazing story, I can't wait to tell you, but since this is a fake site you'll never going to know!</p>
+      <div class="posts large-8 small-12 large-pull-4 columns">
+        <?php 
+          foreach ($posts as $post) { ?>
+            <div class="row box postBox marginBottom20">
+              <span class="postDate"><?php echo $post['date']; ?></span>
+              <div class="row">
+                <div class="large-12 small-9 columns postTitle"><h4><?php echo $post['title']; ?></h4></div>
+              </div>
+              <div class="row marginTop5">
+                <div class="large-12 columns">
+                  <p style="float:left">
+                    <?php if(isset($post['file'])) { echo '<img style="float:left" src="./uploads/thumbnail/'.$post["file"].'" width="200"/>'; } ?>
+                    <?php if(isset($post['text'])) { echo $post['text']; } ?>
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div class="row box postBox marginBottom20">
-          <span class="postDate">11/11/2014</span>
-          <div class="row">
-            <div class="large-12 small-9 columns postTitle"><h4>My latest blog post! Sorry, no picture this time!</h4></div>
-          </div>
-          <div class="row marginTop5">
-            <div class="large-12 columns ">
-             <p style="float:left"><img style="float:left" src="assets/libraries/arc/assets/img/arc-logo-2.png" width="185" height="100"/>Today awesome stuff happened tome, I'll tell you guys all about it! It's going to be an amazing story, I can't wait to tell you, but since this is a fake site you'll never going to know!</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="row box postBox marginBottom20">
-          <span class="postDate">11/11/2014</span>
-          <div class="row">
-            <div class="large-12 small-9 columns postTitle"><h4>My latest blog post! Sorry, no picture this time!</h4></div>
-          </div>
-          <div class="row marginTop5">
-            <div class="large-12 columns ">
-             <p style="float:left"><img style="float:left" src="assets/libraries/arc/assets/img/arc-logo-2.png" width="185" height="100"/>Today awesome stuff happened tome, I'll tell you guys all about it! It's going to be an amazing story, I can't wait to tell you, but since this is a fake site you'll never going to know!</p>
-            </div>
-          </div>
-        </div>
-
+          <?php }
+        ?>
       </div>
 
       </div>
