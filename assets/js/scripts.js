@@ -25,8 +25,7 @@ $(function () {
             removeImage(imageName);
         });
       }
-    }).prop('disabled', !$.support.fileInput)
-        .parent().addClass($.support.fileInput ? undefined : 'disabled'); 
+    });
 
     // create angular app
     var validationApp = angular.module('validationApp', []);
@@ -83,7 +82,15 @@ $(function () {
                       } else {
                         $(".successSubmit").fadeIn('slow').animate({opacity: 1.0}, 1500).effect("pulsate", { times: 2 }, 800).fadeOut('slow');
                         var date = dateNow();
+                        // Add new post to the view
                         $('.posts').prepend(_template(title, text, filename, date));
+                        // Rebuild word occurances
+                        if(data.wordsOccurance) {
+                          $('dl.tags').html('');
+                          $.each(data.wordsOccurance, function(word, occurances) {
+                            $('dl.tags').append('<li>'+word+'<span class="hiddenComma">, </span></li>');
+                          });
+                        }
                       }
                       // Reset validation 
                       valid = false;

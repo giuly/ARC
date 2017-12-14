@@ -64,14 +64,13 @@ switch ($action) {
 			$date = date('Y/m/d H:i');
 			$params['date'] = $date;
 			// Save post to "db"
-			save_post($params);
-			echo '{"response": true}';
+			if(save_post($params)) {
+				$file = new Model('model/word_occurance.json');
+		    $wordsOccurance = $file->read();
+		    $wordsOccurance = array_slice(array_reverse($wordsOccurance), 0, 5);
+				echo '{"response": true, "wordsOccurance": '.json_encode($wordsOccurance).'}'; 
+			}
 		} 
-		break;
-
-	
-	default:
-		# code...
 		break;
 }
 
@@ -81,7 +80,6 @@ switch ($action) {
  * @return boolean
  */
 function validate($params) {
-
 	// This is not a good practice, but for the sake of this demo..
 	global $err_code;
 	$file = new Model('model/accounts.json');
@@ -108,6 +106,11 @@ function validate($params) {
 	return false;
 }
 
+/**
+ * Save post to "db"
+ * @param array
+ * @return boolean
+ */
 function save_post($params) {
 	// Check if image is resized - if not resize it and remove original
 	if($params['file'] != null) { check_image_size($params['file']); }
@@ -123,8 +126,8 @@ function save_post($params) {
 		$file->write($posts);
 	} else {
 		$file->write(array($params));
-	}
-
+	} 
+	return true;
 }
 
 /**
@@ -199,7 +202,7 @@ function save_words_longer_than_x($text, $length) {
 	$all_words = str_word_count($text, 1);
 	foreach ($all_words as $word) {
 		if(strlen($word) > $length) {
-			if( isset($unique_words[$word]) ) { $unique_words[$word]++; } else { $unique_words[$word] = 1; }
+			if( isset($unique_words[strtolower($word)]) ) { $unique_words[strtolower($word)]++; } else { $unique_words[strtolower($word)] = 1; }
 		}
 	}
 	if(!empty($unique_words)) {
