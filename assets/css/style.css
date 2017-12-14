@@ -1,0 +1,166 @@
+body, div, p, span {
+  margin: 0px;
+  padding:0px;
+  font-family: "arial", "sans-serif";
+  height: 100%;
+}
+
+h1, h3, h4 {
+  margin: 0px !important;
+}
+
+.header {
+  margin-bottom: 100px !important;
+  text-align: center;
+}
+
+.container {
+  display: block;
+  width: 90%;
+  min-height: 1000px;
+  margin: auto;
+  border-left: 2px solid #000;
+  border-right: 2px solid #000;
+  padding:15px;
+}
+
+.formBox {
+  display: block;
+  padding-bottom: 10px !important;
+}
+
+.box {
+  border-radius: 5px;
+  border: 2px solid #000;
+  margin:auto !important;
+  width: 100% !important;
+  padding:10px 20px 0px 20px;
+
+}
+
+.help-block {
+  color: red;
+  margin-bottom: 0px;
+  margin-top:2px;
+}
+
+button.disabled, button[disabled], .button.disabled, .button[disabled], a.button.disabled, a.button[disabled], button:focus:not(.disabled), .button:focus:not(.disabled), a.button:focus:not(.disabled) {
+  background-image: none !important;
+  font-size: 14px !important;
+  background-color: #999 !important;
+  border:0px !important;
+  text-shadow: 0px 1px 2px #999 !important;
+  -moz-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2), inset 0px 1px 0px 0px #999 !important;
+  -webkit-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2), inset 0px 1px 0px 0px #999 !important;
+  -webkit-border-radius: 5px !important;
+}
+
+.customButton {
+  height: 30px !important;
+  font-size: 14px ;
+  background-color: #999 ;
+  border:0px;
+  text-shadow: 0px 1px 2px #999 ;
+  background-image: none ;
+  line-height: 14px ;
+  display: inline-block;
+  padding: 8px 15px 8px 15px;
+  color: #FFF;
+  -moz-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2), inset 0px 1px 0px 0px #999;
+  -webkit-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2), inset 0px 1px 0px 0px #999;
+  -webkit-border-radius: 5px;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+.marginTop5 {
+  margin-top: 5px !important;
+}
+
+.marginTop40 {
+  margin-top: 40px !important;
+}
+
+.marginBottom20 {
+  margin-bottom: 20px !important;
+}
+
+.padding_0 {
+  padding: 0px !important;
+}
+
+.hiddenComma {
+  display: none;
+}
+
+.postBox {
+  position: relative !important;
+}
+
+.postDate {
+  position:absolute !important;
+  right: 10px;
+  top:5px;
+}
+
+.image, .texts {
+  float: left;
+  display: inline-block;
+}
+
+/* File upload */
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px !important;
+  direction: ltr;
+  cursor: pointer;
+}
+
+.removeFile {
+  cursor: pointer;
+  color: blue;
+}
+
+.uploading-file {
+  display: none;
+}
+
+.hidden{
+  display: none;
+}
+
+
+@media only screen and (max-width: 1024px)  {
+  dl.tags {
+    list-style-type: none;
+  }
+
+  dl.tags li {
+    float:left;
+  }
+  .tagsBox {
+    border:0px;
+  }
+  .hiddenComma {
+    display: inline-block;
+  }
+}
+
+/* Fixes for IE < 8 */
+@media screen\9 {
+  .fileinput-button input {
+    filter: alpha(opacity=0);
+    font-size: 100%;
+    height: 100%;
+  }
+}
