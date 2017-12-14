@@ -1,9 +1,5 @@
 # ARC
 
-enable extension=php_gd2.dll
+valid account: test@gmail.com
 
-chown
-
-chmod
-
-composer install
+Documentation on the run....
