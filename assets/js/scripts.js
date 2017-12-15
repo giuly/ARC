@@ -6,8 +6,7 @@ $(function () {
       url: url,
       dataType: 'json',
       formData: {'action': 'upload'},
-      disableImageResize : true,
-          add: function(e, data) {
+      add: function(e, data) {
           $('.fileinput-button').hide();
           $('.uploading-file').show();
           data.submit();

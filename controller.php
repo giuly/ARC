@@ -24,10 +24,11 @@ switch ($action) {
 		$options = array (
 			'upload_dir' => dirname(__FILE__) . '/uploads/',
 			'image_file_types' => '/\.(jpe?g|png)$/i',
+			'image_library' => 1,
 			'image_versions' => array(
         'thumbnail' => array(
-          'max_width' => 200,
-          'max_height' => 200
+          'max_width' => 300,
+          'max_height' => 300
         )
       )
 		);
@@ -161,18 +162,18 @@ function getallheaders() {
 }
 
 /**
- * Check if the image has a with of 200px.
+ * Check if the image has a with of 300px.
  * This should be true because the image was resized at upload
  * @param string - image name
  * @return boolean
  */
 function check_image_size($filename) {
 	try {
-		$base_url = './uploads/thumbnail/';
+		$base_url = './uploads/';
 		$image_props = getimagesize($base_url . $filename);
-		if($image_props[0] != 200) {
-			// Resize image to width 200px
-			resize_image($base_url . $filename, 200);
+		if($image_props[0] != 300) {
+			// Resize image to width 300px
+			resize_image($base_url . $filename, 300);
 		}
 		// Remove original image
 		remove_image($filename, false);
@@ -190,7 +191,7 @@ function check_image_size($filename) {
  */
 function resize_image($filename, $maxDim) {
 	$image = new ImageResize($filename);
-	$image->resizeToWidth(200);
+	$image->resizeToWidth(300);
 	$image->save($filename);
 }
 
